@@ -1,0 +1,16 @@
+{
+  "opcServerIp": "192.168.1.105",
+  "opcServerPort": 49320,
+  "opcUaEndpoint": "opc.tcp://127.0.0.1:49370",
+  "refreshInterval": 5,
+  "limits": {
+    "temp": {
+      "critical": 160,
+      "warning": 150
+    },
+    "pressure": {
+      "critical": 3.5,
+      "warning": 3
+    }
+  }
+}

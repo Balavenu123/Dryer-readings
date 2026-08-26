@@ -1,0 +1,16 @@
+[
+  {
+    "id": "superadmin",
+    "username": "superadmin",
+    "passwordHash": "$2b$10$rtuExkGkwRK3FGnD9kvwfOKwH/b24/fT15okSdaqMTRTnWKYXkhFe",
+    "role": "superadmin",
+    "createdAt": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "d7d5f16d-fb49-4dc6-b4bb-46109749ce9c",
+    "username": "Bala Venu",
+    "passwordHash": "$2b$10$TqDK5fZRiQN18u0PUcFAm.0a9nuFLlby.9eVvkPqyH8ApEUuOVi7S",
+    "role": "monitor",
+    "createdAt": "2026-08-16T09:37:49.911Z"
+  }
+]
