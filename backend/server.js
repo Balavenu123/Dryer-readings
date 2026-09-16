@@ -45,6 +45,31 @@ app.use(express.json());
 // Auth routes (public login + protected user management)
 app.use('/api/auth', authRouter);
 
+// ── Bridge Push Endpoint (Site PC → Railway) ────────────────────────────────
+// Must be BEFORE requireAuth — uses its own secret key, not JWT.
+app.post('/api/bridge/push', (req, res) => {
+  const secret = req.headers['x-bridge-secret'];
+  const BRIDGE_SECRET = process.env.BRIDGE_SECRET || 'dryer-bridge-secret-2024';
+  if (secret !== BRIDGE_SECRET) {
+    return res.status(401).json({ error: 'Invalid bridge secret' });
+  }
+  const { dryers: bridgeDryers } = req.body;
+  if (!Array.isArray(bridgeDryers)) {
+    return res.status(400).json({ error: 'Expected { dryers: [...] }' });
+  }
+  const telemetry = updateTelemetryFromBridge(bridgeDryers);
+  const alarms = getAlarms();
+  telemetry.forEach(dryer => io.emit('sensorUpdate', dryer));
+  io.emit('alarmsUpdate', alarms);
+  io.emit('statusUpdate', {
+    time: new Date().toISOString(),
+    plcOnline: true,
+    opcStatus: 'Connected via Bridge',
+    usingSimulator: false
+  });
+  res.json({ success: true, updated: bridgeDryers.length });
+});
+
 // All routes below require a valid JWT
 app.use('/api', requireAuth);
 
@@ -197,31 +222,6 @@ io.on('connection', (socket) => {
   });
 });
 
-// ── Bridge Push Endpoint (Site PC → Railway) ────────────────────────────────
-// The site PC bridge script calls this every 5s with live KEPServer data.
-// Protected by a shared secret key (set BRIDGE_SECRET env var on Railway).
-app.post('/api/bridge/push', (req, res) => {
-  const secret = req.headers['x-bridge-secret'];
-  const BRIDGE_SECRET = process.env.BRIDGE_SECRET || 'dryer-bridge-secret-2024';
-  if (secret !== BRIDGE_SECRET) {
-    return res.status(401).json({ error: 'Invalid bridge secret' });
-  }
-  const { dryers: bridgeDryers } = req.body;
-  if (!Array.isArray(bridgeDryers)) {
-    return res.status(400).json({ error: 'Expected { dryers: [...] }' });
-  }
-  const telemetry = updateTelemetryFromBridge(bridgeDryers);
-  const alarms = getAlarms();
-  telemetry.forEach(dryer => io.emit('sensorUpdate', dryer));
-  io.emit('alarmsUpdate', alarms);
-  io.emit('statusUpdate', {
-    time: new Date().toISOString(),
-    plcOnline: true,
-    opcStatus: 'Connected via Bridge',
-    usingSimulator: false
-  });
-  res.json({ success: true, updated: bridgeDryers.length });
-});
 
 // Serve frontend static files
 const frontendDist = path.join(__dirname, '../frontend/dist');
