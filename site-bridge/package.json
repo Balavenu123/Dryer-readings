@@ -1,0 +1,16 @@
+{
+  "name": "dryer-site-bridge",
+  "version": "1.0.0",
+  "description": "Site PC bridge: reads KEPServer OPC UA and pushes to Railway cloud",
+  "type": "module",
+  "main": "site-bridge.js",
+  "scripts": {
+    "start": "node site-bridge.js"
+  },
+  "dependencies": {
+    "node-opcua": "^2.138.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

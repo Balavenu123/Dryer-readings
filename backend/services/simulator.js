@@ -346,3 +346,16 @@ export function toggleDryerStatus(dryerId) {
   return dryers;
 }
 
+// Called by the bridge endpoint to inject real KEPServer data from site PC
+export function updateTelemetryFromBridge(bridgeDryers) {
+  const limits = getLimits();
+  bridgeDryers.forEach(bridgeDryer => {
+    const dryer = dryers.find(d => d.dryerId === bridgeDryer.dryerId);
+    if (dryer) {
+      Object.assign(dryer, bridgeDryer);
+      dryer.timestamp = new Date().toISOString();
+      checkLimitsAndRaiseAlarms(dryer, limits);
+    }
+  });
+  return dryers;
+}
