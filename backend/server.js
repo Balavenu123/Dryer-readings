@@ -196,6 +196,17 @@ io.on('connection', (socket) => {
   });
 });
 
+// Serve frontend static files
+const frontendDist = path.join(__dirname, '../frontend/dist');
+if (fs.existsSync(frontendDist)) {
+  app.use(express.static(frontendDist));
+  app.get('*', (req, res) => {
+    if (!req.path.startsWith('/api') && !req.path.startsWith('/socket.io')) {
+      res.sendFile(path.join(frontendDist, 'index.html'));
+    }
+  });
+}
+
 // Startup
 const PORT = process.env.PORT || 5000;
 httpServer.listen(PORT, async () => {

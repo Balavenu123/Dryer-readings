@@ -19,7 +19,7 @@ export default function Sidebar() {
       <div className="py-6 px-4 border-b border-outline-variant/30 flex flex-col items-center justify-center gap-2 bg-surface-container-low/50">
         <img src={advantaSymbol} alt="Advanta Symbol" className="h-16 w-16 object-contain" />
         <div className="text-center">
-          <h2 className="text-lg font-black uppercase tracking-[0.15em] font-sans" style={{ color: '#173164' }}>Advanta</h2>
+          <h2 className="text-2xl font-black uppercase tracking-[0.18em] font-sans" style={{ color: '#173164' }}>Advanta</h2>
         </div>
       </div>
 

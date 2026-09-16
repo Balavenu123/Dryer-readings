@@ -3,7 +3,7 @@ import { io } from 'socket.io-client';
 
 const SocketContext = createContext(null);
 
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || '';
 
 export function SocketProvider({ children, token }) {
   const [telemetry, setTelemetry] = useState([]);

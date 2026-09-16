@@ -2,15 +2,15 @@
   {
     "id": "superadmin",
     "username": "superadmin",
-    "passwordHash": "$2b$10$rtuExkGkwRK3FGnD9kvwfOKwH/b24/fT15okSdaqMTRTnWKYXkhFe",
+    "passwordHash": "$2b$10$CQMcoXKpsevlYYrxLsT2bu7BWfCmT6R2WMFG7RPB.QoUreVhMd9xu",
     "role": "superadmin",
     "createdAt": "2026-01-01T00:00:00.000Z"
   },
   {
-    "id": "d7d5f16d-fb49-4dc6-b4bb-46109749ce9c",
-    "username": "Bala Venu",
-    "passwordHash": "$2b$10$TqDK5fZRiQN18u0PUcFAm.0a9nuFLlby.9eVvkPqyH8ApEUuOVi7S",
+    "id": "monitor",
+    "username": "monitor",
+    "passwordHash": "$2b$10$OYtBk9bqz5CmL.pK9zAkGu/AqgOZJ24DOZxf.tuZkuTvqWy6fjdam",
     "role": "monitor",
-    "createdAt": "2026-08-16T09:37:49.911Z"
+    "createdAt": "2026-01-01T00:00:00.000Z"
   }
 ]

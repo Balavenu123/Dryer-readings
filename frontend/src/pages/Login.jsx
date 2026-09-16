@@ -35,7 +35,7 @@ export default function Login() {
         {/* Logo + brand */}
         <div className="flex flex-col items-center mb-10 gap-3">
           <img src={advantaLogo} alt="Advanta" className="h-20 w-20 object-contain" />
-          <h1 className="text-2xl font-black uppercase tracking-[0.15em] font-sans" style={{ color: '#adc7ff' }}>
+          <h1 className="text-3xl font-black uppercase tracking-[0.18em] font-sans" style={{ color: '#adc7ff' }}>
             Advanta
           </h1>
           <p className="text-on-surface-variant font-label-sm text-sm uppercase tracking-widest">
